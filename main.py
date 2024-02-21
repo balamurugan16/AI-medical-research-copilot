@@ -1,22 +1,16 @@
 import streamlit as st
-import time
+from utils.summarize import summarize, template
 
 st.title("AI Summarizer")
 
 with st.sidebar:
-    prompt = st.text_area("Your prompt here", height=300)
-
-
-def summarize():
-    content = ""
-    time.sleep(2)
-    with open("output_cache/summary.md", "r") as f:
-        content = f.read()
-        st.markdown(content)
+    prompt = st.text_area(label="Your Prompt here", value=template.strip(), height=300)
 
 
 form = st.form("summarize-form")
-text = form.text_input("Subject")
+subject = form.text_input("Subject")
 submitted = form.form_submit_button("Summarize")
 if submitted:
-    summarize()
+    with st.spinner("Summarizing..."):
+        summary = summarize(prompt, subject)
+        st.markdown(summary)
