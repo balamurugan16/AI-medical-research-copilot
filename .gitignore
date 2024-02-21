@@ -1,0 +1,4 @@
+embeddings/
+.env
+__pycache__/
+output_cache/

@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+chromadb = "*"
+langchain-community = "==0.0.19"
+langchain-core = "*"
+langchain = "*"
+langchain-openai = "*"
+streamlit = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"
