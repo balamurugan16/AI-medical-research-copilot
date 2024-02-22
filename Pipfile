@@ -10,6 +10,7 @@ langchain-core = "*"
 langchain = "*"
 langchain-openai = "*"
 streamlit = "*"
+bs4 = "*"
 
 [dev-packages]
 

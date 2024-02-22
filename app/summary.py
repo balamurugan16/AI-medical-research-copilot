@@ -1,6 +1,6 @@
 from langchain.chains.summarize import load_summarize_chain
 from langchain.prompts import PromptTemplate
-from utils.models import llm, embeddings
+from app.utils.llm import build_llm
 from langchain_community.vectorstores.chroma import Chroma
 import time
 from app.utils.vector_store import vector_store
@@ -47,6 +47,7 @@ def cache_summary_output(content: str):
 def summarize(prompt: str, question: str) -> str:
     related_docs = vector_store.similarity_search(question, k=50)
     prompt = PromptTemplate(template=prompt, input_variables=["subject", "context"])
+    llm = build_llm()
     chain = load_summarize_chain(
         llm,
         chain_type="stuff",
