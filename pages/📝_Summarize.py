@@ -1,10 +1,11 @@
 import streamlit as st
-from utils.summarize import summarize, template
+from app.summary import summarize, template
 
+st.set_page_config(page_title="📝 Summarizer", page_icon="📝")
 st.title("AI Summarizer")
 
 with st.sidebar:
-    prompt = st.text_area(label="Your Prompt here", value=template.strip(), height=300)
+    prompt = st.text_area(label="Your Prompt here", value=template.strip(), height=200)
 
 
 form = st.form("summarize-form")

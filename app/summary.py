@@ -3,6 +3,7 @@ from langchain.prompts import PromptTemplate
 from utils.models import llm, embeddings
 from langchain_community.vectorstores.chroma import Chroma
 import time
+from app.utils.vector_store import vector_store
 
 
 template = """
@@ -33,12 +34,18 @@ Subject: {subject}
 Context: {context}
 """
 
-db = Chroma(persist_directory="embeddings", embedding_function=embeddings)
+
+SUMMARY_CACHE_PATH = "output_cache/summary_{uuid}.md"
+
+
+def cache_summary_output(content: str):
+    uuid = int(time.time())
+    with open(SUMMARY_CACHE_PATH.format(uuid=uuid), "w") as file:
+        file.write(content)
 
 
 def summarize(prompt: str, question: str) -> str:
-    related_docs = db.similarity_search(question, k=50)
-    print(prompt)
+    related_docs = vector_store.similarity_search(question, k=50)
     prompt = PromptTemplate(template=prompt, input_variables=["subject", "context"])
     chain = load_summarize_chain(
         llm,
@@ -49,7 +56,4 @@ def summarize(prompt: str, question: str) -> str:
     )
     output = chain.invoke({"input_documents": related_docs, "subject": question})
     summary = output["output_text"]
-    current_epoch_time = int(time.time())
-    with open(f"output_cache/summary_{current_epoch_time}.md", "w") as file:
-        file.write(summary)
     return summary
