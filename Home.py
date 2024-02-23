@@ -6,18 +6,15 @@ if "datasources" not in st.session_state:
     st.session_state["datasources"] = []
 
 datasources = st.session_state["datasources"]
-domains = ["PubMed", "DrugBank", "FDA", "DailyMed"]
 
 
 def create_data_source():
-    datasources.append({"url": "", "domain": ""})
+    datasources.append("")
 
 
 def update_data_source(id):
-    text_key = "text_{id}".format(id=id)
-    select_key = "select_{id}".format(id=id)
-    datasources[id]["url"] = st.session_state[text_key]
-    datasources[id]["domain"] = st.session_state[select_key]
+    key = "url_{id}".format(id=id)
+    datasources[id] = st.session_state[key]
 
 
 def delete_data_source(id):
@@ -49,19 +46,10 @@ if len(datasources) == 0:
 
 for id, key in enumerate(datasources):
     cont = c1.container()
-    col1, col2 = cont.columns([0.7, 0.3])
-    text_key = "text_{id}".format(id=id)
-    select_key = "select_{id}".format(id=id)
-    col1.text_input(
+    cont.text_input(
         label="URL",
         placeholder="Enter the url",
-        key=text_key,
+        key="url_{id}".format(id=id),
         on_change=lambda: update_data_source(id),
-    )
-    col2.selectbox(
-        on_change=lambda: update_data_source(id),
-        label="Domain",
-        options=domains,
-        key=select_key,
     )
     # col3.button("X", key=id, type="primary", on_click=lambda: delete_data_source(id))
