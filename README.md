@@ -4,11 +4,11 @@ Reading through medical research papers, clinical trials, and drug trials will b
 
 ## Features
 ### Let's you load articles into the application which should be analysed.
-![Home page](./screenshots/home.png)
+![Home page](https://raw.githubusercontent.com/balamurugan16/AI-medical-research-copilot/main/screenshots/home.png)
 ### Has a chat window where you can chat with Medicopilot about your articles.
-![chat page](./screenshots/chat.png)
+![chat page](https://raw.githubusercontent.com/balamurugan16/AI-medical-research-copilot/main/screenshots/chat.png)
 ### Creates a summary on any subject with the articles you have provided.
-![summary page](./screenshots/summary.png)
+![summary page](https://raw.githubusercontent.com/balamurugan16/AI-medical-research-copilot/main/screenshots/summary.png)
 
 ## Tools used
 1. Python
